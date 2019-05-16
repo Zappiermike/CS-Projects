@@ -1,0 +1,53 @@
+;;This program takes in two integers, one base and one exponent, and returns the value of the base^exponent
+
+allocate-registers base exponent pow number0 number1 number2 loop1 loop2 ifstatement elsestatement test
+
+
+
+;;After allocating, we take in the user’s input of both the base and exponent
+read base
+read exponent
+
+
+;;Now we can define all the variables needed to complete the process
+	li pow 1
+	li number0 0
+	li number1 1
+	li number2 2
+	li loop1, loopHere	
+	li loop2, loopStop
+	li ifstatement, IF
+	li elsestatement, ELSE
+
+loopHere:
+	sgt test exponent number0
+	jeqz test loop2
+	jeqz exponent loop2
+	rem test exponent number2
+	jeqz test ifstatement
+	j elsestatement
+
+IF:	
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;if ((e%2)==0)		   ;;
+	;;base = base * base	   ;;
+	;;exponent = exponent / 2 ;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	mul base base base
+	div exponent exponent number2
+	j loop1
+
+ELSE:	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	;;else:				;;
+	;;	pow = pow * base	;;
+	;;	exponent = exponent - 1;;
+	;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
+	mul pow pow base
+	sub exponent exponent number1
+	j loop1
+
+loopStop:
+	write pow
+	halt

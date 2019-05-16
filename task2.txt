@@ -1,0 +1,29 @@
+;;This program takes in two nonnegative integers, one base and one exponent and writes the base^exponent
+
+allocate-registers base, exponent, pow, loop1, loop2, num
+
+
+;;After allocating registers, we can take in the input from the user of the base and exponent
+
+read base
+read exponent
+li num 1
+li pow 1
+li loop1, loop
+li loop2, end
+
+loop:
+	
+	jeqz exponent loop2
+	
+	;;If the exponent is 0 from the start, we can jump straight to the end of the program. Otherwise, the program will continue 	;;down the line of code here
+	
+	mul pow pow base
+	sub exponent exponent num
+	;;After multiplying the base and exponent, we can subtract one from the exponent and run through the loop again, if needed
+	j loop1
+
+end:
+	;;After going through the loop enough times, we arrive at the end section which prints out the power and stops
+	write pow
+	halt

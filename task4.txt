@@ -1,0 +1,51 @@
+;;This program takes in two integers that are nonnegative, one base and one exponent variable, and writes base^exponent
+
+allocate-registers pow one zero loop elseStatement sp base exponent end final test
+
+	li zero 0
+	li one 1
+	li pow, powLoop
+	li elseStatement, ELSE
+	li final 1
+	li sp 0
+
+	read base
+	read exponent
+
+	li end, endLoop
+	j pow
+	
+
+powLoop:
+	;;The input will be the base and exponent
+	;;The output will be the base raised to the exponent
+	;;Our previous answer will then lead to end which follows down to endLoop
+	seq test exponent zero
+	;;if test =0 we want to jump to else condition
+	jeqz test elseStatement
+	j end
+
+ELSE:
+	;;This is where we reduce the power by one
+	st exponent sp
+	add sp sp one
+	st end sp
+	add sp sp one
+	sub exponent exponent one
+	li end afterRecL
+	j pow
+
+afterRecL:
+	;;Pop context
+	sub sp sp one
+	ld end sp
+	sub sp sp one
+	ld exponent sp
+	mul final final base
+	sub exponent exponent one
+	j end
+
+
+endLoop:
+	write final
+	halt

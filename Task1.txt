@@ -1,0 +1,12 @@
+;;This very basic program takes in two integers a/home/mscheie/Documents/Task1.txtnd then writes the sum of the two numbers squared. This program also doesn’t need to allocate any registers because of how it is set up.
+
+read 00
+read 01
+;;These first two read the two numbers that the user would input
+mul 03 00 00
+mul 04 01 01
+;;We then multiply the numbers by themselves to get the squared problem
+add 05 03 04
+;;We add the two squared numbers together and place in register 5
+write 05
+halt
